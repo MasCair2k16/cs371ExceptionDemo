@@ -14,8 +14,6 @@ namespace ExceptionsDemo
             return roster[position];
         }
 
-
-
         public int CrewCapacity
         {
             get;
@@ -62,6 +60,21 @@ namespace ExceptionsDemo
         // Methods
         public void AddCrew(string position, string name)
         {
+            try
+            {
+                if (CurrentCrewSize() >= CrewCapacity)
+                {
+                    throw new App_Exception("Fire more people");
+                }
+                
+            }
+            catch (App_Exception e)
+            {
+                Console.WriteLine("Error: {0}", e.Message);
+                return;
+
+            }
+
             // If the position exists in the roster, add the name to its list
             if (roster.ContainsKey(position))
             {
